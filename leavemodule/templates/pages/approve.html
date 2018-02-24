@@ -1,0 +1,65 @@
+
+{%  extends 'pages/base.html' %}
+{% block title %}Home|{{user.username}}{% endblock%}
+{% block notification %} {{ count }}{% endblock %}
+{% block username %}{{ user.username }}{% endblock %}
+
+{% block notimenu %}
+{% for field in leave %}
+	<li>
+  		 <li>
+                <a href="#">
+                    <i class="fa fa-users text-aqua"></i><strong>Leave:</strong> {{ field.leave_type }}
+                    <strong>Status: </strong>{{ field.processing_status}}
+                </a>
+            </li>
+    
+    </li>
+{% endfor %}
+{% endblock %}
+
+{% block user %}<h3><strong><span style='color: white'>{{user.first_name}}</span></strong></h3>{%endblock%}
+{% block department %}
+	<span style="color: white;font-size: 18px; font-weight: bold">{{ faculty.facultyDepartment }}</span>
+{%endblock%}
+{% block usertag %}{{user.first_name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row well">
+            <h1><center><span style='font-weight: bold'>LEAVE REQUEST</span></center></h1>
+        </div>
+    </div>
+    <div class="container">
+    	<div class="row well">
+    		<section class="content">
+		        <table id="customers">
+		        	<tr>
+					    <th>Username</th>
+					    <th>Replacing User</th>
+					    <th>Leave Type</th>
+					    <th>Details</th>
+					    <th>Cancel</th>
+					    <th>Approve</th>
+					    <th>Forward</th>
+					 </tr>
+				{% for j in leaveRequest %}
+	    		{% for i in j %}
+					<tr>
+						<td>{{i.user}}</td>
+						<td>{{ i.replacing_user }}</td>
+						<td>{{ i.leave_type }}</td>
+						<td><a href='/profile/{{user.username}}/{{i.leave_id}}' class="btn btn-flat btn-success">Details</a></td>
+						<td><a href='/delete/{{i.user.username}}/{{i.leave_id}}' class="btn btn-flat btn-primary">Reject</a></td>
+						<td><a href='/approve/{{i.user.username}}/{{i.leave_id}}' class="btn btn-flat btn-danger">Approve</a></td>
+						<td><a href='/forward/{{i.user.username}}/{{i.leave_id}}' class="btn btn-flat btn-info">Forward</a></td>
+					</tr>	    
+				{% endfor %}
+				{% endfor %}
+				</table>
+				<a href="/profile" class="btn btn-flat btn-block btn-primary">Go Back</a>
+			</section>
+    	</div>
+    </div>
+    
+{% endblock %}

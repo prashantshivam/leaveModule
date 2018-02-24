@@ -1,0 +1,26 @@
+{% extends 'registration/base.html' %}
+{% block title %} Login | Form{% endblock %}
+{% block content %}
+<div class="rerun"></div>
+<div class="container">
+  <div class="card"></div>
+  <div class="card">
+    <h1 class="title">Login</h1><hr>
+      <form method="post" action="">
+      {% csrf_token %}
+        <span style="margin-left: 13%"><b>Username:</b></span>
+        <div class="input-container" style="border: 2px solid #ed2553">
+        <td>{{form.username}}</td>
+        </div>
+        <span style="margin-left: 13%"><b>Password:</b></span>
+        <div class="input-container" style="border: 2px solid #ed2553">
+          <td>{{form.password}}</td>
+        </div>
+        <div class="button-container">
+          <button><span>Go</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

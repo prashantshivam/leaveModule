@@ -1,0 +1,80 @@
+{%  extends 'pages/base.html' %}
+{% block title %}Home|{{user.username}}{% endblock%}
+{% block notification %} {{ count }}{% endblock %}
+{% block username %}{{ user.username }}{% endblock %}
+
+{% block notimenu %}
+{% for field in leave %}
+	<li>
+  		 <li>
+                <a href="#">
+                    <i class="fa fa-users text-aqua"></i><strong>Leave:</strong> {{ field.leave_type }}
+                    <strong>Status: </strong>{{ field.processing_status}}
+                </a>
+            </li>
+    
+    </li>
+{% endfor %}
+{% endblock %}
+
+{% block user %}<h3><strong><span style='color: white'>{{user.first_name}}</span></strong></h3>{%endblock%}
+{% block department %}
+	<span style="color: white;font-size: 18px; font-weight: bold">{{ faculty.facultyDepartment }}</span>
+{%endblock%}
+{% block usertag %}{{user.first_name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row well">
+            <h1><center><span style='font-weight: bold'>User Information</span></center></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row well">
+            <section class="content">
+                <table id="customers">
+                    <tr>
+                        <td>Leave ID:</td>
+                        <td>{{leaveData.leave_id}}</td>
+                     </tr>
+                     <tr>
+                        <td>User:</td>
+                        <td>{{leaveData.user.username}}</td>
+                     </tr>
+                     <tr>
+                        <td>Replacing User:</td>
+                        <td>{{leaveData.replacing_user}}</td>
+                     </tr>
+                     <tr> 
+                        <td>Leave Type:</td>
+                        <td>{{leaveData.leave_type}}</td>
+                     </tr>
+                    <tr>
+                        <td>Start Date:</td>
+                        <td>{{leaveData.start_date}}</td>
+                     </tr>
+                     <tr>
+                        <td>End Date:</td>
+                        <td>{{leaveData.end_date}}</td>
+                     </tr>
+                     <tr>
+                        <td>Purpose:</td>
+                        <td>{{leaveData.purpose}}</td>
+                     </tr>
+                     <tr>
+                        <td>Leave Address:</td>
+                        <td>{{leaveData.leave_address}}</td>
+                     </tr>
+                     <tr>
+                        <td><a href="/approve/{{leaveData.user.username}}/{{leaveData.leave_id}}" class="btn btn-success btn-flat btn-block">Approve</a></td>
+                        <td><a href='/delete/{{leaveData.user.username}}/{{leaveData.leave_id}}' class="btn btn-flat btn-danger btn-block">Reject</a></td>
+                     </tr>
+                </table>
+                
+                
+                <a href="/profile/{{user.username}}/Approve" class="btn btn-flat btn-block btn-primary">Go Back</a>
+            </section>
+        </div>
+    </div>
+{% endblock %}

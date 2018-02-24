@@ -1,0 +1,75 @@
+{%  extends 'pages/base.html' %}
+{% block title %}Home|{{user.username}}{% endblock%}
+{% block notification %} {{ count }}{% endblock %}
+{% block username %}{{ user.username }}{% endblock %}
+
+{% block notimenu %}
+{% for field in leave %}
+	<li>
+  		 <li>
+                <a href="#">
+                    <i class="fa fa-users text-aqua"></i><strong>Leave:</strong> {{ field.leave_type }}
+                    <strong>Status: </strong>{{ field.processing_status}}
+                </a>
+            </li>
+    	
+    </li>
+{% endfor %}
+{% endblock %}
+
+{% block user %}<h3><strong><span style='color: white'>{{user.first_name}}</span></strong></h3>{%endblock%}
+{% block department %}
+	<span style="color: white;font-size: 18px; font-weight: bold">{{ faculty.facultyDepartment }}</span>
+{%endblock%}
+{% block usertag %}{{user.first_name }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row well">
+            <h1><center><span style='font-weight: bold'>LEAVE DETAILS: {{user.username}}</span></center></h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row well">
+	        <section class="content">
+	        <table id="customers">
+				  <tr>
+				    <th>#</th>
+				    <th>LEAVE TYPE</th>
+				    <th>REMAINING LEAVES</th>
+				  </tr>
+				  <tr>
+				    <td>1</td>
+				    <td>CASUAL</td>
+				    <td>{{details.casual}}</td>
+				  </tr>
+				  <tr>
+				    <td>2</td>
+				    <td>VACATION</td>
+				    <td>{{ details.vacation }}</td>
+				  </tr>
+				  <tr>
+				    <td>3</td>
+				    <td>COMMUTED</td>
+				    <td>{{ details.commuted }}</td>
+				  </tr>
+				  <tr>
+				    <td>4</td>
+				    <td>RESTRICTED</td>
+				    <td>{{ details.restricted }}</td>
+				  </tr>
+				  <tr>
+				    <td>5</td>
+				    <td>SPECIAL CASUAL</td>
+				    <td>{{ details.special_casual}}</td>
+				  </tr>
+				</table>
+	        <table class="table">
+	        </section>
+        </div>
+        <a href='/profile' class="btn btn-block btn-primary"> GO BACK</a>
+    </div>
+    
+
+{% endblock %}
+

@@ -1,0 +1,93 @@
+{%  extends 'pages/base.html' %}
+{% block title %}Home|{{user.username}}{% endblock%}
+{% block notification %} {{ count }}{% endblock %}
+{% block username %}{{ user.username }}{% endblock %}
+
+{% block notimenu %}
+{% for field in leave %}
+    <li>
+         <li>
+                <a href="#">
+                    <i class="fa fa-users text-aqua"></i><strong>Leave:</strong> {{ field.leave_type }}
+                    <strong>Status: </strong>{{ field.processing_status}}
+                </a>
+            </li>
+    
+    </li>
+{% endfor %}
+{% endblock %}
+
+{% block user %}<h3><strong><span style='color: white'>{{user.first_name}}</span></strong></h3>{%endblock%}
+{% block department %}
+    <span style="color: white;font-size: 18px; font-weight: bold">{{ faculty.facultyDepartment }}</span>
+{%endblock%}
+{% block usertag %}{{user.first_name }}{% endblock %}
+{% block homeurl %} {{ user.username }}{% endblock %}
+{% block content %}
+<div class="container">
+            <div class="row well" style="background: #d8dbdd;">
+
+            {% if leave_form.errors %}
+                {% for field in leave_form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in leave_form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form class="form-horizontal" role="form" method="post">
+            	{% csrf_token %}
+                <center><h2><strong>Leave Application</strong></h2></center>
+                <hr><hr>
+                <div class="form-group">
+                    <label for="Leave type" class="col-sm-5 control-label">Leave Type</label>
+                    <div class="col-sm-7">
+                        {{ leave_form.leave_type }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-5 control-label">Replacing User</label>
+                    <div class="col-sm-7">
+                        {{ leave_form.replacing_user }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-5 control-label">Purpose</label>
+                    <div class="col-sm-7">
+                        {{ leave_form.purpose }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate" class="col-sm-5 control-label">Start Date</label>
+                    <div class="col-sm-7">
+                        {{ leave_form.start_date }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country" class="col-sm-5 control-label">End Date</label>
+                    <div class="col-sm-7">
+                        {{ leave_form.end_date }}
+                    </div>
+                </div> <!-- /.form-group -->
+                <div class="form-group">
+                    <label for="country" class="col-sm-5 control-label">Leave Address</label>
+                    <div class="col-sm-7">
+                        {{ leave_form.leave_address }}
+                    </div>
+                </div> <!--<!-- /.form-group -->
+                               <div class="form-group">
+                    <div class="col-sm-7 col-sm-offset-5">
+                        <button style="width: 40%" type="submit" class="btn btn-primary btn-flat">Apply</button>
+                    </div>
+                </div>
+            </form> <!-- /form -->
+
+            </div>
+        </div>
+{% endblock %}
